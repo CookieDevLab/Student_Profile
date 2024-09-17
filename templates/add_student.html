@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Add Student</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Database</h1>
+            <nav>
+                <ul>
+                    <li><a class = "main-button" href="{{ url_for('search_student') }}">Search Student</a></li>
+                    <li><a class = "main-button" href="{{ url_for('view_records') }}">View Records</a></li>
+                </ul>
+            </nav>
+        </header>
+        <h1>Add Student</h1>
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+        <form action="{{ url_for('add_student') }}" method="post">
+            <label for="roll">Roll No.:</label>
+            <input type="text" id="roll" name="roll" required><br>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="dob">Year of Birth:</label>
+            <input type="text" id="dob" name="dob" required><br>
+            <label for="att">Attendance (P/A):</label>
+            <input type="text" id="att" name="att" required><br>
+            <input type="submit" value="Add Student">
+        </form>
+    </div>
+</body>
+</html>

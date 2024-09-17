@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Search Student</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Database</h1>
+            <nav>
+                <ul>
+                    <li><a class = "main-button" href="{{ url_for('add_student') }}">Add Student</a></li>
+                    <li><a class = "main-button" href="{{ url_for('view_records') }}">View Records</a></li>
+                </ul>
+            </nav>
+        </header>
+        <h1>Search Student</h1>
+        <form action="{{ url_for('search_student') }}" method="post">
+            <label for="search_term">Search Term:</label>
+            <input type="text" id="search_term" name="search_term" required>
+            <label for="menu2">Search By:</label><br>
+            <select id="menu2" name="menu2" required>
+                <option value="1">Roll No.</option>
+                <option value="2">Name</option>
+                <option value="3">Birth Year</option>
+                <option value="4">Present Students</option>
+                <option value="5">Absent Students</option>
+            </select><br><br>
+            <input type="submit" value="Search">
+        </form>
+
+        {% if result %}
+            <h2>Search Results</h2>
+            <table class="result-table">
+                <tr>
+                    <th>Roll No.</th>
+                    <th>Name</th>
+                    <th>Year of Birth</th>
+                    <th>Attendance</th>
+                </tr>
+                {% for row in result %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>

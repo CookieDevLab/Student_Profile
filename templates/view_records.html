@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>View Student Records</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Database</h1>
+            <nav>
+                <ul>
+                    <li><a class = "main-button" href="{{ url_for('add_student') }}">Add Student</a></li>
+                    <li><a class = "main-button" href="{{ url_for('search_student') }}">Search Student</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section class="main-content">
+            <h2>All Student Records</h2>
+            {% if result %}
+                <table class="result-table">
+                    <tr>
+                        <th>Roll No.</th>
+                        <th>Name</th>
+                        <th>Year of Birth</th>
+                        <th>Attendance</th>
+                    </tr>
+                    {% for row in result %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No records found.</p>
+            {% endif %}
+        </section>
+        <footer>
+            <p>&copy; 2023 Student Database</p>
+        </footer>
+    </div>
+</body>
+</html>
